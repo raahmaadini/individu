@@ -15,6 +15,19 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    
+            <x-nav-link href="/products" :active="request()->is('products')">
+                {{ __('Produk') }}
+            </x-nav-link>
+
+            
+                    @if(auth()->user()->role === 'owner')
+        <x-nav-link :href="route('reports.products')" :active="request()->routeIs('reports.products')">
+            {{ __('Laporan Produk') }}
+        </x-nav-link>
+        @endif
+
+            
                 </div>
             </div>
 
@@ -64,13 +77,20 @@
         </div>
     </div>
 
+    
+
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+
         </div>
+
+        
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
