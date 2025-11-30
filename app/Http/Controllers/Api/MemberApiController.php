@@ -14,14 +14,12 @@ class MemberApiController extends Controller
             'data' => Member::all()
         ]);
     }
-
     public function show($id)
     {
         return response()->json([
             'data' => Member::findOrFail($id)
         ]);
     }
-
     public function store(Request $request)
     {
         // ADD VALIDATION HERE
@@ -31,7 +29,6 @@ class MemberApiController extends Controller
             'phone' => 'required|string',
             'address' => 'nullable|string',
         ]);
-
         $member = Member::create($validated);
 
         return response()->json([
