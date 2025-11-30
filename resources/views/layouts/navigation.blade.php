@@ -27,6 +27,12 @@
         </x-nav-link>
         @endif
 
+         <x-nav-link href="/members" :active="request()->is('members')">
+    {{ __('Members') }}
+</x-nav-link>
+
+
+
             
                 </div>
             </div>
