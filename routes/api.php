@@ -2,14 +2,21 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ProductApiController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Api\MemberApiController;
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('members', MemberApiController::class);
 
+Route::middleware(['auth:sanctum', 'role:admin,owner'])->group(function () {
+    Route::get('/members', [MemberApiController::class, 'index']);
+    Route::get('/members/{id}', [MemberApiController::class, 'show']);
+});
+
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+    Route::post('/members', [MemberApiController::class, 'store']);
+    Route::put('/members/{id}', [MemberApiController::class, 'update']);
+    Route::patch('/members/{id}', [MemberApiController::class, 'update']);
+    Route::delete('/members/{id}', [MemberApiController::class, 'destroy']);
 });
 
 
