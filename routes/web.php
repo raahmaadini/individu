@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -8,35 +7,26 @@ use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MemberApiController;
 
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/members', [MemberController::class, 'index'])->name('members.index');
-
     /**
      * PROFILE
      */
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     /**
      * PRODUCT PAGE (ADMIN & OWNER boleh lihat)
      */
     Route::get('/products', [ProductController::class, 'index'])
         ->name('products.index');
-
-  
-
     /**
      * PRODUCT CRUD (ADMIN ONLY)
      */
@@ -52,9 +42,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('/products/{product}', [ProductController::class, 'destroy'])
             ->name('products.destroy');
     });
-
     /**
-     * OWNER ONLY — REPORT
+     * //OWNER ONLY — REPORT
      */
     Route::middleware('role:owner')->group(function () {
         Route::get('/report/products', [ReportController::class, 'products'])
@@ -62,5 +51,4 @@ Route::middleware('auth')->group(function () {
     });
 
 });
-
 require __DIR__.'/auth.php';
