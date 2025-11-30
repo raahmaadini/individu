@@ -30,6 +30,6 @@
 
     <br><br>
 
-    <button class="bg-green-600 text-white px-4 py-2">Update</button>
+    <button class="bg-blue-600 text-white px-4 py-2">Simpan Perubahan</button>
 </form>
 </x-app-layout>

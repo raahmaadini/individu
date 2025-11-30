@@ -18,6 +18,10 @@ return Application::configure(basePath: dirname(__DIR__))
         'admin' => \App\Http\Middleware\AdminOnly::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class,
     ]);
+    $middleware->api(prepend: [
+    \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+]);
+
 })
 
 
